@@ -1,0 +1,7 @@
+install.packages("BiocManager")
+install.packages("tidyverse")
+install.packages("data.table")
+install.packages("reshape2")
+install.packages("Seurat")
+install.packages("Signac")
+BiocManager::install("edgeR")
