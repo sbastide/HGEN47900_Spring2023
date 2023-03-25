@@ -409,10 +409,11 @@ Effectively, we are extracting the stage names in the proper order from the colu
 Let's try to plot it again:
 ```{r}
 count_table_long %>% 
-  filter(Gene_Name %in% c("fgf8a", "fgf8b")) %>% 
+  filter(Gene_Name %in% c("fgf8a", "fgf8b")) %>%
+  mutate(expression = log10(expression)) %>% 
   ggplot() +
-  geom_point(aes(x = stage, y = log10(expression), col = Gene_Name)) +
-  geom_line(aes(x = stage, y = log10(expression), col = Gene_Name, group = Gene_Name)) +
+  geom_point(aes(x = stage, y = expression, col = Gene_Name)) +
+  geom_line(aes(x = stage, y = expression, col = Gene_Name, group = Gene_Name)) +
   xlab("Developmental stage") +
   ylab("Log10(FPKM)") +
   theme_classic() +
