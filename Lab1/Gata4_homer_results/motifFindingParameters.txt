@@ -1,0 +1,1 @@
+cmd = /tmp/RtmpAfWbNP/target_8412151460b9 mm10 Gata4_homer_results -len 8,10,12 -size 100 -S 8 -p 72 -cache 1000 -fdr 0
