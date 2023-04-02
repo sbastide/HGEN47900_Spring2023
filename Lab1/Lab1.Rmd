@@ -32,7 +32,7 @@ library(dplyr)
 library(tidyr)
 library(ggplot2)
 library(edgeR)
-library(marge)
+# library(marge)
 library(rtracklayer)
 library(GenomicRanges)
 library(patchwork)
@@ -205,7 +205,7 @@ bash make_counts.sh
 
 Let's first read in the count table and, once again, create a metadata table.
 ```{r}
-count_table <- data.table::fread("ChIPseq_count_table.txt", data.table = FALSE) %>% 
+count_table <- data.table::fread("ChIPseq_count_table_q10.txt", data.table = FALSE) %>% 
   tibble::column_to_rownames("Geneid") %>% 
   select(-c(1:5))
 colnames(count_table) <- colnames(count_table) %>% gsub("aln/", "", .) %>% gsub("[.]bam", "", .)
@@ -241,6 +241,7 @@ TMM_by_condition <- levels(groups) %>%
     }
   }) %>% do.call(cbind, .)
 colnames(TMM_by_condition) <- levels(groups)
+# saveRDS(TMM_by_condition, "TMM_by_condition_unfiltered_peaks.Rds")
 ```
 
 For this analysis, we are only going to keep peaks that show "significant" binding in at least one of the conditions (we'll also focus only on cardiomyocytes "CM"). For this, we log-transform the data and keep peaks for which the maximum value is greater than one. We also discard all peaks that have a value of more than 1 for NKX2-5 in the NKO background. We keep 87,156/172,461 peaks.
